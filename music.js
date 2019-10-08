@@ -11,10 +11,10 @@ module.exports = client => {
         const serverQueue = queue.get(msg.guild.id)
 
         if(msg.content.toLowerCase().startsWith('!play')) {
-            this.execute(msg, serverQueue)
+            execute(msg, serverQueue)
             return
         } else if(msg.content.toLowerCase().startsWith("!skip")) {
-            this.skip(msg, serverQueue)
+            skip(msg, serverQueue)
             return
         } else if(msg.content.toLowerCase().startsWith('!stop')) {
             stop(msg, serverQueue)
