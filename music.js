@@ -8,7 +8,7 @@ module.exports = client => {
 
         if(!msg.content.startsWith("!")) return
 
-        const serverQueue = queue.get(msg.guid.id)
+        const serverQueue = queue.get(msg.guild.id)
 
         if(msg.content.toLowerCase().startsWith('!play')) {
             this.execute(msg, serverQueue)
@@ -50,7 +50,7 @@ module.exports = client => {
                 playing: true
             }
 
-            queue.set(msg.guid.id, queueConstruct)
+            queue.set(msg.guild.id, queueConstruct)
 
             queueConstruct.songs.push(song)
 
@@ -60,7 +60,7 @@ module.exports = client => {
                 this.play(msg, queueConstruct.songs[0])
             } catch (err) {
                 console.log(err)
-                queue.delete(msg.guid.id)
+                queue.delete(msg.guild.id)
                 return msg.channel.send(err)
             }
         } else {
@@ -71,8 +71,8 @@ module.exports = client => {
 
     function play(msg, song) {
         const queue = msg.client.queue
-        const guild = msg.guid
-        const serverQueue = queue.get(msg.guid.id)
+        const guild = msg.guild
+        const serverQueue = queue.get(msg.guild.id)
 
         if(!song) {
             serverQueue.voiceChannel.leave()
