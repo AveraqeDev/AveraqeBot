@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const request = require('snekfetch')
 const { RichEmbed } = require("discord.js")
-const { stripIndents } = require("common-tags")
 
 const friends = ['251120969320497152', '296735951089303552', '234252100014571521', '86699222539206656']
 
