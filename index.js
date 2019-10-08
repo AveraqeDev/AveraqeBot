@@ -6,7 +6,7 @@ const { RichEmbed } = require("discord.js")
 const friends = ['251120969320497152', '296735951089303552', '234252100014571521', '86699222539206656']
 
 const updateMemberCount = () => {
-    const channel = global.guild.channels.find('id', '630911402701488138')
+    const channel = global.guild.channels.find(id => id.id === '630911402701488138')
     if(channel) {
         channel.setName(`Members: ${global.guild.memberCount}`)
     }
@@ -14,7 +14,7 @@ const updateMemberCount = () => {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}`)
-    global.guild = client.guilds.find('id', '630897931117133846')
+    global.guild = client.guilds.find(id => id.id === '630897931117133846')
     updateMemberCount();
     client.user.setPresence({
         game: {
