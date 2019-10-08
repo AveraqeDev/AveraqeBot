@@ -29,7 +29,7 @@ module.exports = client => {
         const args = msg.content.split(' ')
         const voiceChannel = msg.member.voiceChannel
         if(!voiceChannel) return msg.channel.send('❌ You need to be in a voice channel to play music!')
-        const permissions = voiceChannel.permissionFor(msg.client.user)
+        const permissions = voiceChannel.permissionsFor(msg.client.user)
         if(!permissions.has('CONNECT') || !permissions.has('SPEAK')) {
             return message.channel.send('❌ I need the permissions to join and   speak in your voice channel!')
         }
