@@ -162,6 +162,9 @@ client.on('message', msg => {
     if(msg.content.toLowerCase().includes('ryan')) {
         return msg.channel.send(`HAAAAANNNNKKKKKKKK`)
     }
+    if(msg.content.toLowerCase().includes("matt")) {
+        return msg.channel.send(`Oof`)
+    }
     if(msg.content === '!cat') {
         const cat = request.get('https://aws.random.cat/meow')
         cat.then(r => msg.reply(r.body.file))
