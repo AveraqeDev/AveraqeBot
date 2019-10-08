@@ -107,7 +107,7 @@ module.exports = client => {
             return msg.channel.send('❌ You need to be in a voice channel to stop the  music!')
         }
         if(!serverQueue) {
-            return msg.channel.send('❌ There is no song that I could skip!');
+            return msg.channel.send('❌ There is no song that I could stop!');
         }
         serverQueue.songs = []
         serverQueue.connection.dispatcher.end()
