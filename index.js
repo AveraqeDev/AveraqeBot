@@ -25,7 +25,7 @@ client.on('ready', () => {
 })
 
 client.on('message', msg => {
-    if(msg.content === '!friend') {
+    if(msg.content.toLowerCase() === '!friend') {
         if(msg.channel !== global.guild.channels.get('630946793357705237')) {
             return msg.reply(`❌ Please run this command in the ${global.guild.channels.get('630946793357705237').toString()} channel`)
                     .then(m => {
@@ -52,7 +52,7 @@ client.on('message', msg => {
 })
 
 client.on('message', msg => {
-    if(msg.content.startsWith('!8ball')) {
+    if(msg.content.toLowerCase().startsWith('!8ball')) {
         if(msg.channel !== global.guild.channels.get('630946793357705237')) {
             return msg.reply(`❌ Please run this command in the ${global.guild.channels.get('630946793357705237').toString()} channel`)
                     .then(m => {
@@ -83,7 +83,7 @@ client.on('message', msg => {
         msg.replyText = Math.floor((Math.random() * replies.length) + 0)
         return msg.reply(replies[msg.replyText])
     }
-    if(msg.content.split('').join('') === '!roll') {
+    if(msg.content.toLowerCase().split('').join('') === '!roll') {
         if(msg.channel !== global.guild.channels.get('630946793357705237')) {
             return msg.reply(`❌ Please run this command in the ${global.guild.channels.get('630946793357705237').toString()} channel`)
                     .then(m => {
@@ -93,7 +93,7 @@ client.on('message', msg => {
         }
         return msg.reply(`✅ You rolled a ${Math.floor((Math.random() * 6) + 1)}`)
     }
-    if(msg.content === '!ping') {
+    if(msg.content.toLowerCase() === '!ping') {
         if(msg.channel !== global.guild.channels.get('630946793357705237')) {
             return msg.reply(`❌ Please run this command in the ${global.guild.channels.get('630946793357705237').toString()} channel`)
                     .then(m => {
@@ -124,7 +124,7 @@ client.on('guildMemberRemove', () => {
 })
 
 client.on('message', msg => {
-    if(msg.content.startsWith('!kick')) {
+    if(msg.content.toLowerCase().startsWith('!kick')) {
         if(!msg.member.hasPermission("KICK_MEMBERS")) {
             return msg.reply('❌ You do not have permissions to ban members.').then(m => m.delete(5000))
         }
@@ -143,7 +143,7 @@ client.on('message', msg => {
 
         return member.kick().then(() => msg.reply(`✅ ${member.user.tag} was kicked.`).catch(error => msg.reply(`Sorry, an error occured.`)))
     }
-    if(msg.content === "!cc") {
+    if(msg.content.toLowerCase() === "!cc") {
         if(!msg.member.hasPermission('MANAGE_MESSAGES')) {
             return msg.reply('❌ You do not have permissions to clear the chat.').then(m => m.delete(5000))
         }
@@ -156,7 +156,7 @@ client.on('message', msg => {
     if(msg.content.toLowerCase().includes('zack')) {
         return msg.reply(`Don't you mean CheeseDick?`)
     }
-    if(msg.content.includes('CheeseDick')) {
+    if(msg.content.toLowerCase().includes('CheeseDick')) {
         return msg.channel.send(`<@296735951089303552> Someone is beckoning you!`)
     }
     if(msg.content.toLowerCase().includes('ryan')) {
@@ -165,11 +165,11 @@ client.on('message', msg => {
     if(msg.content.toLowerCase().includes("matt")) {
         return msg.channel.send(`Oof`)
     }
-    if(msg.content === '!cat') {
+    if(msg.content.toLowerCase() === '!cat') {
         const cat = request.get('https://aws.random.cat/meow')
         cat.then(r => msg.reply(r.body.file))
     }
-    if(msg.content === '!dog') {
+    if(msg.content.toLowerCase() === '!dog') {
         const dog = request.get('https://dog.ceo/api/breeds/image/random')
         dog.then(r => msg.reply(r.body.message))
     }
