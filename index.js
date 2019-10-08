@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const request = require('snekfetch')
 const { RichEmbed } = require("discord.js")
+const music = require('./music')
+const ytdl = require('ytdl-core')
 
 const friends = ['251120969320497152', '296735951089303552', '234252100014571521', '86699222539206656']
 
@@ -15,6 +17,7 @@ const updateMemberCount = () => {
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}`)
     global.guild = client.guilds.find(id => id.id === '630897931117133846')
+    music(client)
     updateMemberCount();
     client.user.setPresence({
         game: {
@@ -212,7 +215,7 @@ client.on('message', msg => {
 })
 
 function getMember(msg, toFind = '') {
-    toFind = toFind.toLocaleLowerCase
+    toFind = toFind.toLowerCase()
 
     let target = global.guild.members.get(toFind)
 
@@ -236,16 +239,6 @@ function getMember(msg, toFind = '') {
 
 function formatDate(date) {
     return new Intl.DateTimeFormat('en-US').format(date)
-}
-
-async function promptMessage(msg, author, time, validReactions) {
-    time += 1000
-
-    for(const reaction of validReactions) await msg.react(reaction)
-
-    const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id
-
-    return msg.awaitReactions(filter, { max: 1, time: time }).then(collected => collected.first() && collected.first().emoji.name)
 }
 
 client.login(process.env.BOT_TOKEN)
