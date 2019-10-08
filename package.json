@@ -1,0 +1,17 @@
+{
+   "name": "averaqe-bot",
+   "version": "1.0.0",
+   "description": "A very basic Discord Bot",
+   "main": "index.js",
+   "author": "AveraqeDev",
+   "scripts": {
+      "start": "node index.js",
+      "dev": "nodemon index.js"
+   },
+   "dependencies": {
+      "discord.js": "^11.5.1"
+   },
+   "devDependencies": {
+      "nodemon": "^1.19.3"
+   }
+}
