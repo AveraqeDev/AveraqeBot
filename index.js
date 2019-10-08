@@ -15,7 +15,6 @@ const updateMemberCount = () => {
 }
 
 client.on('ready', () => {
-    client.setMaxListeners(20)
     console.log(`Logged in as ${client.user.tag}`)
     global.guild = client.guilds.find('id', '630897931117133846')
     updateMemberCount();
