@@ -169,6 +169,10 @@ client.on('message', msg => {
         const cat = request.get('https://aws.random.cat/meow')
         cat.then(r => msg.reply(r.body.file))
     }
+    if(msg.content === '!dog') {
+        const dog = request.get('https://dog.ceo/api/breeds/image/random')
+        dog.then(r => msg.reply(r.body.message))
+    }
 })
 
 client.on('message', msg => {
