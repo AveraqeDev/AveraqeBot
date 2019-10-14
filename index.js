@@ -240,5 +240,4 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('en-US').format(date)
 }
 
-//lient.login(process.env.BOT_TOKEN)
-client.login('NjMwODk2OTg4NDAwOTEwMzU2.XaPz1A.rmN30nMnVv1_tcUBiOPrhfl-QZI');
+client.login(process.env.BOT_TOKEN)
