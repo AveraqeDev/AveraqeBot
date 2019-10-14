@@ -5,7 +5,6 @@ module.exports = client => {
 
     client.on('message', async msg => {
         if(msg.author.bot) return;
-
         if(!msg.content.startsWith("!")) return
 
         const serverQueue = queue.get(msg.guild.id)
@@ -57,7 +56,7 @@ module.exports = client => {
             try {
                 var connection = await voiceChannel.join()
                 queueConstruct.connection = connection
-                this.play(msg, queueConstruct.songs[0])
+                play(msg.guild, queueConstruct.songs[0])
             } catch (err) {
                 console.log(err)
                 queue.delete(msg.guild.id)
@@ -65,14 +64,13 @@ module.exports = client => {
             }
         } else {
             serverQueue.songs.push(song)
+            console.log(serverQueue.songs)
             return msg.channel.send(`✅ ${song.title} has been added to the queue!`)
         }
     }
     
-    function play(msg, song) {
-        const queue = msg.client.queue
-        const guild = msg.guild
-        const serverQueue = queue.get(msg.guild.id)
+    function play(guild, song) {
+        const serverQueue = queue.get(guild.id)
     
         if(!song) {
             serverQueue.voiceChannel.leave()
@@ -80,15 +78,15 @@ module.exports = client => {
             return
         }
     
-        const dispatcher = serverQueue.connection.playStream(song.url)
-                .on('end', () => {
-                    console.log('Music ended!')
-                    serverQueue.songs.shift()
-                    this.play(msg, serverQueue.songs[0])
-                })
-                .on('error', error => {
-                    console.error(error)
-                })
+        const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
+            .on('end', () => {
+                console.log('Music ended!')
+                serverQueue.songs.shift()
+                play(guild, serverQueue.songs[0])
+            })
+            .on('error', error => {
+                console.error(error)
+            })
         dispatcher.setVolumeLogarithmic(serverQueue.volume / 5)
     }
     
@@ -106,14 +104,14 @@ module.exports = client => {
         if(!msg.member.voiceChannel) {
             return msg.channel.send('❌ You need to be in a voice channel to stop the  music!')
         }
-        if(!serverQueue) {
-            return msg.channel.send('❌ There is no song that I could stop!');
-        }
         serverQueue.songs = []
         serverQueue.connection.dispatcher.end()
     }
     
     function nowPlaying(msg, serverQueue) {
+        if(!msg.member.voiceChannel) {
+            return msg.channel.send('❌ You need to be in a voice channel to stop the  music!')
+        }
         if(!serverQueue) {
             return msg.channel.send('❌ There is no song playing. to play a song run !play <youtube link>')
         }

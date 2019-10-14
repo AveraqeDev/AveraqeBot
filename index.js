@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const request = require('snekfetch')
 const { RichEmbed } = require("discord.js")
 const music = require('./music')
-const ytdl = require('ytdl-core')
 
 const friends = ['251120969320497152', '296735951089303552', '234252100014571521', '86699222539206656']
 
@@ -241,4 +240,5 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('en-US').format(date)
 }
 
-client.login(process.env.BOT_TOKEN)
+//lient.login(process.env.BOT_TOKEN)
+client.login('NjMwODk2OTg4NDAwOTEwMzU2.XaPz1A.rmN30nMnVv1_tcUBiOPrhfl-QZI');
